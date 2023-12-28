@@ -1,0 +1,27 @@
+.board-content {
+  display: inline-flex;
+  flex-wrap: nowrap;
+}
+
+.list-group {
+  min-width: 296px;
+  min-height: 10px;
+}
+
+.ghost {
+  background: brown;
+  border-style: dotted solid;
+}
+
+.ghost > div.case-card-item {
+  color: black;
+}
+
+
+.board {
+  // height: 100vh !important;
+  // width: 100vh !important;
+}
+
+.column {
+}

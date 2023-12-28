@@ -1,0 +1,31 @@
+.content-card {
+
+    .v-card-text {
+      padding: 0px;
+    }
+  
+    .v-list-item__prepend {
+      width: 40px !important;
+    }
+
+    .v-breadcrumbs {
+      height: 36px !important;
+    }
+    
+
+    .v-breadcrumbs-item--disabled {
+      opacity: 1 !important;
+    }
+
+    .v-breadcrumbs-item--link:hover {
+      text-decoration: none;
+    }
+  
+    .title {
+      font-size: 16px;
+      font-family: "Khmer OS Siemreap" !important;
+      font-weight: 200;
+    }
+  }
+  
+  
