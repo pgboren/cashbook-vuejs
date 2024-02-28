@@ -2,6 +2,11 @@
 const documentInfos = {
   user: {
     name: 'USER',
+    edit: {
+      icon: 'users',
+      title: 'អ្នកប្រើប្រាស់',
+      list_route_name: 'users',
+    },
     new: {
       icon: 'users',
       title: 'អ្នកប្រើប្រាស់',

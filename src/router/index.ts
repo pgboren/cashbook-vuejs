@@ -80,6 +80,9 @@ const router = createRouter({
           name: "edit-user",
           path: "/users/edit/:id",
           component: () => import("@/views/apps/document/edit-document-view.vue"),
+          meta: {
+            docName: "user",
+          },
         }
       ],
     },

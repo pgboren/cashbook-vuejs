@@ -16,7 +16,7 @@
         </template>
 
         <template #form>
-            <UserForm  ref="docForm" v-if="model.username" v-model="model"/>     
+            <UserForm ref="docForm" v-model="model"/>     
         </template>
     </ContentLayout>
 </template>

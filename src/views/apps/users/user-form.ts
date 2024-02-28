@@ -16,6 +16,16 @@ export default defineComponent({
     modelValue: Object,
     userId: String,
   },
+  emits: ['update:modelValue'],
+  watch: {
+    modelValue: {
+      immediate: true,
+      handler(newVal) {
+        this.model = newVal;
+        console.log(this.model);
+      },
+    },
+  },
   data() {
     return {
       config:apiEndpoints ,

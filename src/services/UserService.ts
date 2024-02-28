@@ -22,7 +22,7 @@ class UserService {
     try {
       var apiUrl = `${this.apiEndpoints.auth.user}/check-email-exists?email=${email}`;
       if (userId) {
-        apiUrl += `&userId=${userId}`;
+        apiUrl += `&id=${userId}`;
       }
       const response = await axios.get(apiUrl, this.config);
       const emailExists = response.data.exist;
