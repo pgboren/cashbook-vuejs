@@ -22,7 +22,6 @@ export default defineComponent({
       immediate: true,
       handler(newVal) {
         this.model = newVal;
-        console.log(this.model);
       },
     },
   },
@@ -37,8 +36,11 @@ export default defineComponent({
       ],
       rules: {
         username: [
-        v => !!v || 'Username is required',
-        v => (v && v.length <= 10) || 'Username must be less than 10 characters',
+        value => !!value || 'Username is required',
+        value => (value && value.length <= 10) || 'Username must be less than 10 characters',
+        value => {
+          return this.checkUsernameExists(value);
+        }
         ],
         password: {
           required: value => !!value || 'Required.',
@@ -85,11 +87,28 @@ export default defineComponent({
       }
       return true;
     },
+    async checkUsernameExists(value) {
+      const result = await userService.checkUsernameExisted(value, this.model._id);
+      if (result == true) {
+        return 'Username is already exist.';
+      }
+      return true;
+    },
     confirmPasswordMatchRule(v) {
       return v === this.model.password || 'Passwords do not match';
     },
     reset() {
       this.$refs.form.reset();
+    },
+    getData() {
+      const data = {};
+      data.username = this.model.username;
+      data.email = this.model.email;
+      data.password = this.model.password;
+      data.confirmPassword = this.model.confirmPassword;
+      data.enable = this.model.enable;
+      data.roles = this.model.roles.map(role => role._id);
+      return data;
     },
     async validate(): boolean {
       const { valid } = await this.$refs.form.validate();
@@ -105,10 +124,7 @@ export default defineComponent({
         .catch((error: any) => {
           console.error('Error fetching user data:', error);
         });
-    },
-    getData(): any { 
-        return this.model;
-    },
+    }
   },
   mounted() {
       this.getRoles();

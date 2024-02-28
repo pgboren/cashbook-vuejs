@@ -18,6 +18,23 @@ class UserService {
     this.apiEndpoints = apiEndpoints;
   }
 
+  async checkUsernameExisted(username:String, userId: any): boolean {
+    try {
+      var apiUrl = `${this.apiEndpoints.auth.user}/check-username-exists?username=${username}`;
+      if (userId) {
+        apiUrl += `&id=${userId}`;
+      }
+      const response = await axios.get(apiUrl, this.config);
+      const usernameExists = response.data.exist;
+      if (usernameExists) {
+        return true;
+      }
+      return false;
+    } catch (error) {
+      return error.message;
+    }
+}
+
   async checkEmailExisted(email:String, userId: any): boolean {
     try {
       var apiUrl = `${this.apiEndpoints.auth.user}/check-email-exists?email=${email}`;
@@ -35,20 +52,6 @@ class UserService {
     }
 }
 
-  updateUser(userId: String, formData:FormData) : Promise<any> {
-    return new Promise((resolve, reject) => {
-      const apiUrl = `${this.apiEndpoints.auth.user}/${userId}`;
-      axios.put(apiUrl, formData, this.config).then(response => {
-        if (response.status === 200) {
-          return response.data;
-        } else {
-          throw new Error(`Error: ${response.status} - ${response.statusText}`);
-        }
-      }).then(data => resolve(data))
-        .catch(error => reject(`Error: ${error.message}`));
-      });
-  }
-  
   getAllUsers(deleted:boolean, page:number, limit:number, sort:string, order: string): Promise<any> {
       return new Promise((resolve, reject) => {
         const requestOptions = {

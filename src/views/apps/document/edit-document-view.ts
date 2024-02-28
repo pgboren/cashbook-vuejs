@@ -51,8 +51,9 @@ export default defineComponent({
     async saveButtonClicked() {
       const  valid  = await this.$refs.docForm.validate();
       if (valid) {  
-        const userId = this.$route.params.userId;
-        userService.updateUser(userId, this.$refs.docForm.getData())
+        const id = this.$route.params.id;
+        const data = this.$refs.docForm.getData();
+        documentService.update(id, data)
         .then(response => {
           this.$router.go(-1);
         })

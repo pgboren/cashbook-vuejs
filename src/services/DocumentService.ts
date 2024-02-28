@@ -6,6 +6,20 @@ import axios from 'axios';
 
 class DocumentService extends BaseService {
 
+  async update(id: String, formData:any) : Promise<any> {
+    return new Promise((resolve, reject) => {
+      const apiUrl = `${this.apiEndpoints.auth.user}/${id}`;
+      axios.put(apiUrl, formData, this.config).then(response => {
+        if (response.status === 200) {
+          return response.data;
+        } else {
+          throw new Error(`Error: ${response.status} - ${response.statusText}`);
+        }
+      }).then(data => resolve(data))
+        .catch(error => reject(`Error: ${error.message}`));
+      });
+  }
+
   async getAll(docname: string, keyword: string, deleted:boolean, page:number, limit:number, sort:string, order: string) {
       const requestOptions = {
         method: 'GET',
