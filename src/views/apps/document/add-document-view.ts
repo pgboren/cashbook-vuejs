@@ -45,6 +45,10 @@ export default defineComponent({
     async validate () {
       const  valid  = await this.$refs.docForm.validate();
       if (valid) {    
+
+        //we use form data to manage file upload
+        //this.$refs.docForm.getData(), but we have to use config_multipart
+
         documentService.add(this.model)
         .then(response => {
           this.reset();
