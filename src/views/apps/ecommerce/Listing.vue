@@ -50,6 +50,7 @@
               <v-row>
                 <v-col cols="12">
                   <perfect-scrollbar class="listbox">
+                    
                   <ais-hits >
                     
                     <template v-slot="{ items, sendEvent }">

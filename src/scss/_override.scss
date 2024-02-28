@@ -39,9 +39,9 @@ Not supports in Firefox and IE */
 }
   .v-application {
     [class*="text-"] {
-      font-family: $font-family, sans-serif, 'Khmer OS System';
+      font-family: $font-family, sans-serif, 'Khmer OS Siemreap';
     }
-    font-family: $font-family, sans-serif, 'Khmer OS System';
+    font-family: $font-family, sans-serif, 'Khmer OS Siemreap';
 
     .font-kh-os-siemreap {
       font-family: 'Khmer OS Siemreap' !important; 
@@ -83,10 +83,10 @@ Not supports in Firefox and IE */
       }
 
       .v-list-item {
-        height: 40px;
+        height: 45px;
         min-height: 38px;
         .v-list-item-title {
-          font-size: 0.9rem !important;
+          font-size: 1rem !important;
         }
 
         .v-list-item__prepend {
@@ -102,9 +102,6 @@ Not supports in Firefox and IE */
 
   }
 
-  .v-sheet {
-    // background: $v-theme-background !important;
-  }
 
   .v-card-text {
     padding: 20px 30px 30px;

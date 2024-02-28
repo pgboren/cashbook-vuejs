@@ -1,12 +1,11 @@
 // Import necessary modules from Vue
 import { defineComponent, ref, onMounted } from 'vue';
 import ContentLayout from "./../../../layouts/full/content/form/FormContentLayout.vue";
-import UserForm from "./user-form.vue";
+import userForm from '../users/user-form';
 
 // Import UserService and apiEndpoints
 import UserService from "@/services/UserService";
 import apiEndpoints from '@/config/config';
-import userForm from './user-form';
 const userService = new UserService(apiEndpoints);
 
 // Define the user list component
@@ -29,7 +28,7 @@ export default defineComponent({
   },
   methods: {
     async fertchUser() {
-      const userId = this.$route.params.userId;
+      const userId = this.$route.params.id;
       try {
         this.model = await userService.getUser(userId);  
         console.log(this.model);

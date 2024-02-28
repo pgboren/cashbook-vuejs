@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { RouterView } from "vue-router";
-import Customizer from "./customizer/Customizer.vue";
-import { useCustomizerStore } from "@/stores/customizer";
-import ApplicationContainer from "./../../components/ApplicationContainer.vue";
-const customizer = useCustomizerStore();
+  import { RouterView } from "vue-router";
+  import Customizer from "./customizer/Customizer.vue";
+  import { useCustomizerStore } from "@/stores/customizer";
+  import ApplicationContainer from "./../../components/ApplicationContainer.vue";
+  const customizer = useCustomizerStore();
 </script>
 
 <template>
@@ -14,8 +14,10 @@ const customizer = useCustomizerStore();
       customizer.setHorizontalLayout ? 'horizontalLayout' : 'verticalLayout',
     ]">
     <Customizer />
+
     <ApplicationContainer>
-      <RouterView />  
+      <RouterView :key="$route.fullPath"/>  
     </ApplicationContainer>
+    
   </v-app>
 </template>

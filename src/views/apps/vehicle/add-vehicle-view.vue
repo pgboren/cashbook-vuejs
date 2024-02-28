@@ -12,12 +12,13 @@
         </template>
         
         <template #action>
-          <v-btn  color="green" size="small" icon="mdi-check" @click="saveButtonClicked()"  class="ml-auto d-none d-sm-flex btn-action" variant="text"/>
+          <v-btn  color="green" size="small" icon="mdi-check" @click="validate()" class="ml-auto d-none d-sm-flex btn-action" variant="text"/>
         </template>
 
         <template #form>
-            <UserForm  ref="docForm" v-if="model.username" v-model="model"/>     
+          <UserForm  ref="docForm" v-model="model"/>     
         </template>
     </ContentLayout>
 </template>
-<script lang="ts" src="./edit-user-view.ts"></script>
+<script lang="ts" src="./add-vehicle-view.ts"></script>
+<style lang="scss" src="./add-vehicle-view.scss"></style>

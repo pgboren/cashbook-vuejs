@@ -4,8 +4,7 @@
         :breadcrumbs="breadcrumbs">
     </BaseBreadcrumb> -->
     
-
-        <div  no-gutters class="d-flex flex-row mb-6 ">
+    <div  no-gutters class="d-flex flex-row mb-6 ">
         <CaseColumn v-for="column in board.clumns" :heading="column.name" :bg_color="column.color">
             <draggable
             :force-fallback="true"

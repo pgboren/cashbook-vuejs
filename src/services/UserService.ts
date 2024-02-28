@@ -8,7 +8,7 @@ class UserService {
   private config = {
     headers: {
       'x-access-token': useUserStore().currentUser.accessToken,
-      'Content-Type': 'multipart/form-data',
+      'Content-Type': 'application/json',
     },
   };
 
@@ -35,20 +35,6 @@ class UserService {
     }
 }
 
-  deleteUser(userId: String) : Promise<any> {
-    return new Promise((resolve, reject) => {
-      const apiUrl = `${this.apiEndpoints.auth.user}/${userId}`;
-      axios.delete(apiUrl, this.config).then(response => {
-        if (response.status === 200) {
-          return response.data;
-        } else {
-          throw new Error(`Error: ${response.status} - ${response.statusText}`);
-        }
-      }).then(data => resolve(data))
-        .catch(error => reject(`Error: ${error.message}`));
-      });
-  }
-
   updateUser(userId: String, formData:FormData) : Promise<any> {
     return new Promise((resolve, reject) => {
       const apiUrl = `${this.apiEndpoints.auth.user}/${userId}`;
@@ -62,44 +48,7 @@ class UserService {
         .catch(error => reject(`Error: ${error.message}`));
       });
   }
-
-  getUser(userId: String) : Promise<any> {
-    return new Promise((resolve, reject) => {
-      const requestOptions = {
-        method: 'GET',
-        headers: { 
-          'Content-Type': 'application/json',
-          'x-access-token': useUserStore().currentUser.accessToken
-        }
-      };
-      const apiUrl = `${this.apiEndpoints.auth.user}/${userId}`;
-      fetch(apiUrl, requestOptions)
-        .then(response => {
-          if (response.ok) {
-            return response.json().then(data => resolve(data));
-          } else {
-            reject(`Error: ${response.status} - ${response.statusText}`);
-          }
-        })
-        .catch(error => {
-          reject(`Error: ${error.message}`);
-        });
-    });
-  }
-
-  createUser(formData:FormData): Promise<any> {
-    return new Promise((resolve, reject) => {
-      axios.post(this.apiEndpoints.auth.user, formData, this.config).then(response => {
-        if (response.status === 200) {
-          return response.data;
-        } else {
-          throw new Error(`Error: ${response.status} - ${response.statusText}`);
-        }
-      }).then(data => resolve(data))
-        .catch(error => reject(`Error: ${error.message}`));
-      });
-    }
-
+  
   getAllUsers(deleted:boolean, page:number, limit:number, sort:string, order: string): Promise<any> {
       return new Promise((resolve, reject) => {
         const requestOptions = {

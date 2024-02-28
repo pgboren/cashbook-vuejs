@@ -38,24 +38,21 @@
                     :rules="[rules.confirm_password.required, rules.confirm_password.min, confirmPasswordMatchRule]"
                     required/>
 
-                  <v-file-input accept="image/png, image/jpeg, image/bmp"
-                    placeholder="Pick an avatar"
-                    prepend-icon=""
-                    v-model="model.files" 
-                    prepend-inner-icon="mdi-paperclip"
-                    label="រូបថត"
-                    required
-                    :rules="[rules.files]"
-                    class="file-upload"/>
-
                     <v-combobox
                     v-model="model.roles"
                     :items="roles"
                     label="តួនាទី"
+                    item-title="name"
+                    item-value="_id"
                     chips
                     multiple
                     prepend-inner-icon="mdi-account-multiple">
                   </v-combobox>
+
+                  <v-switch color="primary"
+                    v-model="model.enable"
+                    label="សកម្ម"
+                ></v-switch>
         </v-form>
       </div>
     </div>

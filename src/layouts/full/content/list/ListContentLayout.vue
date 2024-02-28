@@ -1,22 +1,24 @@
 <template>
-<v-card class="content-card" min-width="300" >
-    <v-card-text>
-        <v-row class="title pa-3" style="align-items: center;">
-            <v-col>
-                <slot name="title">{{ title }}</slot>
-            </v-col>
-            <v-col cols="2" class="text-right">
-                <slot name="action"/>
-            </v-col>
-        </v-row>
-        <v-row class="ma-0">
-            <v-sheet rounded="lg" style="width: 100%;">
-          <slot name="content"/>
-        </v-sheet>
-            
-        </v-row>
-    </v-card-text>
-</v-card>
+    
+    <v-row class="view-header" >
+        <v-col cols="4" class="title">
+            <slot name="title">{{ title }}</slot>
+        </v-col>
+        <v-col cols="4" class="search">
+            <v-text-field 
+                    density="compact"
+                    variant="solo"
+                    label="ស្វែងរក"
+                    append-inner-icon="mdi-magnify"
+                    single-line
+                    rounded  hide-details/>
+        </v-col>
+        <v-col cols="4" class="action"><slot name="action"/></v-col>
+    </v-row>
+    
+    <v-row class="list-content-view pl-1 pr-1">
+        <slot name="content"/>
+    </v-row>
 </template>
 
 <script lang="ts" src="./ListContentLayout.ts"></script>

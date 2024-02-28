@@ -13,8 +13,8 @@ const roleService = new RoleService(apiEndpoints);
 export default defineComponent({
   name: "user-view",
   props: {
-    modelValue:Object,
-    userId: String
+    modelValue: Object,
+    userId: String,
   },
   data() {
     return {
@@ -89,28 +89,15 @@ export default defineComponent({
         roleService.getAll().then((response: any) => {
           const rolesArray = Array.from(response);
           rolesArray.forEach((role, index) => {
-            this.roles.push(role.name);
+            this.roles.push(role);
           });
         })
         .catch((error: any) => {
           console.error('Error fetching user data:', error);
         });
     },
-    getData(): FormData {     
-        const formData = new FormData();
-        formData.append('username', this.model.username);
-        formData.append('email', this.model.email);
-        formData.append('password', this.model.password);
-        formData.append('confirmPassword', this.model.confirmPassword);
-        formData.append('confirmPassword', this.model.confirmPassword);
-        if (this.model.files && this.model.files.length > 0) {
-            formData.append('file', this.model.files[0]);
-        }
-        const rolesArray = Array.from(this.model.roles);
-        rolesArray.forEach((role, index) => {
-          formData.append(`roles[${index}]`, role);
-        });
-        return formData;
+    getData(): any { 
+        return this.model;
     },
   },
   mounted() {

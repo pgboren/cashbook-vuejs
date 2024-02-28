@@ -23,7 +23,7 @@ class RoleService {
       const apiUrl = `${this.apiEndpoints.auth.role}`;
       axios.get(apiUrl, this.config).then(response => {
         if (response.status === 200) {
-          return response.data;
+          return response.data.docs;
         } else {
           throw new Error(`Error: ${response.status} - ${response.statusText}`);
         }

@@ -1,13 +1,12 @@
 
 <template>
-    <VerticalHeader/>
-    
-    <VerticalSidebarVue/>
     
     <v-main >
-      <v-container class="pa-2">
+      <VerticalHeader/>
+      <VerticalSidebarVue/>
+      <v-col class="view-place-holder">
         <slot></slot>
-      </v-container>
+      </v-col>
     </v-main>  
 </template>
 <script lang="ts" src="./ApplicationContainer.ts"></script>

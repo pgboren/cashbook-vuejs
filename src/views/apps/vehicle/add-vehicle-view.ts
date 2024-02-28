@@ -41,7 +41,6 @@ export default defineComponent({
       if (valid) {    
         userService.createUser(this.$refs.docForm.getData())
         .then(response => {
-          this.$emit('userSaved', response);
           this.reset();
         })
         .catch(error => {

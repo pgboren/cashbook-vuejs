@@ -2,8 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import { useUserStore } from '@/stores/user';
 
 const router = createRouter({
-  //history: createWebHistory(import.meta.env.BASE_URL),
-  history: createWebHistory("/"),
+  history: createWebHistory(),
   routes: [
     {
       path: "/",
@@ -35,29 +34,52 @@ const router = createRouter({
           }
         },
         {
+          name: "Grids",
+          path: "/grids",
+          component: () => import("@/views/ui-components/Grids.vue"),
+        },
+        {
           name: "Cards",
           path: "/cards",
           component: () => import("@/views/ui-components/Cards.vue"),
         },
         {
+          name: "vehicles",
+          path: "/vehicles",
+          component: () => import("@/views/apps/vehicle/vehicle-list-view.vue"),
+          meta: {
+            docName: "vehicle",
+          },
+        },
+        
+        {
           name: "users",
           path: "/users",
-          component: () => import("@/views/apps/users/user-list.vue"),
+          component: () => import("@/views/apps/document/document-list-view.vue"),
+          meta: {
+            docName: "user",
+          },
         },
         {
           name: "view-user",
-          path: "/users/:userId",
-          component: () => import("@/views/apps/users/user-view.vue"),
+          path: "/users/:id",
+          component: () => import("@/views/apps/document/document-view.vue"),
+          meta: {
+            docName: "user",
+          },
         },
         {
           name: "add-user",
           path: "/users/addnew",
-          component: () => import("@/views/apps/users/add-user-view.vue"),
+          component: () => import("@/views/apps/document/add-document-view.vue"),
+          meta: {
+            docName: "user",
+          },
         },
         {
           name: "edit-user",
-          path: "/users/edit/:userId",
-          component: () => import("@/views/apps/users/edit-user-view.vue"),
+          path: "/users/edit/:id",
+          component: () => import("@/views/apps/document/edit-document-view.vue"),
         }
       ],
     },
@@ -75,11 +97,11 @@ const router = createRouter({
   ],
 });
 
-router.beforeEach((to) => {
-  // ✅ This will work because the router starts its navigation after
-  // the router is installed and pinia will be installed too
+router.beforeEach((to, from, next) => {
   const useStore = useUserStore()
+  //We have to add check the access token of It is expired
   if (to.meta.requiresAuth && !useStore.isLoggedIn) return '/login'
+  next();
 })
 
 

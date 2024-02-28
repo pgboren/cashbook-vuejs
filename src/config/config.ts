@@ -7,6 +7,9 @@ const apiEndpoints = {
     user: `${API_BASE_URL}/api/users`,
     role: `${API_BASE_URL}/api/roles`,
   },
+  view: {
+    doc_list: `${API_BASE_URL}/api`,
+  }
   // Add more modules for different parts of your application
 } as const;
 
