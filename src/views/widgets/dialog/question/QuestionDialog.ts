@@ -5,7 +5,7 @@ export default defineComponent({
   name: "question-dialog",
   data() {
     return {
-      dialog: Boolean,
+      dialog: false,
       title: String,
       question: String
     };

@@ -6,6 +6,7 @@ import ContentLayout from "./../../../layouts/full/content/form/FormContentLayou
 import RoleService from "@/services/RoleService";
 import UserService from "@/services/UserService";
 import apiEndpoints from '@/config/config';
+
 const userService = new UserService(apiEndpoints);
 const roleService = new RoleService(apiEndpoints);
 
@@ -36,33 +37,33 @@ export default defineComponent({
       ],
       rules: {
         username: [
-        value => !!value || 'Username is required',
-        value => (value && value.length <= 10) || 'Username must be less than 10 characters',
-        value => {
+          (        value: any) => !!value || 'Username is required',
+          (        value: string | any[]) => (value && value.length <= 10) || 'Username must be less than 10 characters',
+        (        value: any) => {
           return this.checkUsernameExists(value);
         }
         ],
         password: {
-          required: value => !!value || 'Required.',
-          min: v => v.length >= 8 || 'Min 8 characters'
+          required: (value: any) => !!value || 'Required.',
+          min: (v: string | any[]) => v.length >= 8 || 'Min 8 characters'
         },
         confirm_password: {
-          required: value => !!value || 'Required.',
-          min: v => v.length >= 8 || 'Min 8 characters'
+          required: (value: any) => !!value || 'Required.',
+          min: (v: string | any[]) => v.length >= 8 || 'Min 8 characters'
         },
         files: {
-          required: value => v.length > 0 || 'Required.',
+          required: (value: any) => v.length > 0 || 'Required.',
         },
         email: [
-          value => {
+          (          value: any) => {
             if (value) return true
             return 'E-mail is requred.'
           },
-          value => {
+          (          value: string) => {
             if (/.+@.+\..+/.test(value)) return true
             return 'E-mail must be valid.'
           },
-          value => {
+          (          value: any) => {
             return this.checkEmailExists(value);
           }
         ],
@@ -77,49 +78,54 @@ export default defineComponent({
     ContentLayout
   },
   methods: {
-    remove (item) {
-      this.chips.splice(this.chips.indexOf(item), 1)
-    },
-    async checkEmailExists(value) {
-      const result = await userService.checkEmailExisted(value, this.model._id);
+    
+    async checkEmailExists(email: string) {
+      const result = await userService.checkEmailExisted(email, this.model._id);
       if (result == true) {
         return 'Email is already exist.';
       }
       return true;
     },
-    async checkUsernameExists(value) {
-      const result = await userService.checkUsernameExisted(value, this.model._id);
+    async checkUsernameExists(name: string) {
+      const result = await userService.checkUsernameExisted(name, this.model._id);
       if (result == true) {
         return 'Username is already exist.';
       }
       return true;
     },
-    confirmPasswordMatchRule(v) {
+    confirmPasswordMatchRule(v: string) {
       return v === this.model.password || 'Passwords do not match';
     },
     reset() {
-      this.$refs.form.reset();
+      const form = this.$refs.form as HTMLFormElement;
+      form.reset();
     },
     getData() {
-      const data = {};
-      data.username = this.model.username;
-      data.email = this.model.email;
-      data.password = this.model.password;
-      data.confirmPassword = this.model.confirmPassword;
-      data.enable = this.model.enable;
-      data.roles = this.model.roles.map(role => role._id);
+      const data: User = {
+        username: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+        enable: false,
+        roles: []
+      };
+      data.username = this.model?.username;
+      data.email = this.model?.email;
+      data.password = this.model?.password;
+      data.confirmPassword = this.model?.confirmPassword;
+      data.enable = this.model?.enable;
+      data.roles = this.model?.roles.map((role: { _id: any; }) => role._id);
       return data;
     },
-    async validate(): boolean {
-      const { valid } = await this.$refs.form.validate();
+    async validate(): Promise<boolean> {
+      const form = this.$refs.form as HTMLFormElement;
+      const { valid } = await form.validate();
       return valid;
     },
     getRoles(){
         roleService.getAll().then((response: any) => {
           const rolesArray = Array.from(response);
-          rolesArray.forEach((role, index) => {
-            this.roles.push(role);
-          });
+          rolesArray.forEach((role, index) => this.roles.push(role));
         })
         .catch((error: any) => {
           console.error('Error fetching user data:', error);

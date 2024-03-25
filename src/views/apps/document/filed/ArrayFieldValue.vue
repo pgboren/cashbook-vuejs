@@ -21,7 +21,7 @@
     },
     methods: {
       generateStringRepresentation() {
-        if (this.doc && Array.isArray(this.doc[this.field.name])) {
+        if (this.doc && this.field && Array.isArray(this.doc[this.field.name])) {
           return this.doc[this.field.name].map(item => item.name).join(', ');
         } else {
           return '';
@@ -30,4 +30,3 @@
     },
   });
 </script>
-

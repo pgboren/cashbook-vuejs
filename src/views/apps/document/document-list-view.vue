@@ -31,23 +31,15 @@
             :height="calculateHeight()"
             :hover="true"
             @update:options="fetchDocs">
-            
-            <template v-slot:header="{ props }">
-              <tr>
-                <th v-for="header in props.headers" :key="header.text">
-                  {{ header.text }}
-                </th>
-              </tr>
-            </template>
-
+           
             <template v-slot:item="{ item }">
               <slot name="row">
                 <tr @click="handleTableRowClicked(item)">
                   <td v-for="column in docinfo?.list.columns">
-                     <StringFieldValue v-if="column.type == 'string'" :doc="item" :name="column.key" /> 
-                     <RoundedPhotoFieldValue v-if="column.type == 'photo'" :readonly="true" :doc="item" :field="column"/>
-                     <ArrayFieldValue v-if="column.type == 'array'" :doc="item" :field="column"  />
-                    <DateTimeFieldValue v-if="column.type == 'datetime'" :doc="item" :field="column"  />
+                    <StringFieldValue v-if="column.type == 'string'" :doc="item" :name="column.key" /> 
+                    <RoundedPhotoFieldValue v-if="column.type == 'photo'" :readonly="true" :doc="item" :field="column"/>
+                    <ArrayFieldValue v-if="column.type == 'array'" :doc="item" :field="column"  />
+                     <!-- <DateTimeFieldValue v-if="column.type == 'datetime'" :doc="item" :field="column"  /> -->
                     <BooleanFieldValue v-if="column.type == 'boolean'" :doc="item" :field="column"  />
                     <ColorFieldValue v-if="column.type == 'color'" :doc="item" :field="column"  />
                   </td>

@@ -114,17 +114,7 @@ const router = createRouter({
           meta: {
             docName: "user",
           },
-        },
-        {
-          name: "upload_user_profile_picture",
-          path: "/users/profile_upload/:id",
-          component: () => import("@/views/apps/users/user-profile-picture-upload.vue"),
-          meta: {
-            docName: "user",
-          },
-        }
-        
-        
+        } 
       ],
     },
     {

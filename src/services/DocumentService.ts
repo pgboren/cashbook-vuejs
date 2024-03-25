@@ -72,7 +72,7 @@ class DocumentService extends BaseService {
         method: 'GET',
         headers: { 
           'Content-Type': 'application/json',
-          'x-access-token': useUserStore().currentUser.accessToken
+          'x-access-token': useUserStore().currentUser.accessToken|| '' // or any default string value
         }
       };
       const apiUrl = `${endPoint}/${id}`;
