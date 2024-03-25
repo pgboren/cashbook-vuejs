@@ -5,7 +5,7 @@
         <template #title>
           <v-breadcrumbs :items="getBreadcrumbsData()">
             <template v-slot:prepend>
-              <vue-feather type="users" class="feather-sm v-icon v-icon--size-default"></vue-feather>
+              <v-icon :icon="docinfo?.list.icon"></v-icon>
             </template>
             <template v-slot:divider>
               <v-icon icon="mdi-chevron-right"></v-icon>
@@ -22,7 +22,7 @@
           
           <v-data-table-server
             v-model:items-per-page="itemsPerPage"
-            :headers="docinfo.list.headers"
+            :headers="docinfo.list.columns"
             :items-length="totalItems"
             :items="docs"
             :loading="loading"
@@ -43,9 +43,16 @@
             <template v-slot:item="{ item }">
               <slot name="row">
                 <tr @click="handleTableRowClicked(item)">
-                  <userListRow v-if="docinfo.name == 'USER'" :document="item"/>
+                  <td v-for="column in docinfo?.list.columns">
+                     <StringFieldValue v-if="column.type == 'string'" :doc="item" :name="column.key" /> 
+                     <RoundedPhotoFieldValue v-if="column.type == 'photo'" :readonly="true" :doc="item" :field="column"/>
+                     <ArrayFieldValue v-if="column.type == 'array'" :doc="item" :field="column"  />
+                    <DateTimeFieldValue v-if="column.type == 'datetime'" :doc="item" :field="column"  />
+                    <BooleanFieldValue v-if="column.type == 'boolean'" :doc="item" :field="column"  />
+                    <ColorFieldValue v-if="column.type == 'color'" :doc="item" :field="column"  />
+                  </td>
                 </tr>
-            </slot>
+              </slot>
             </template>
 
           </v-data-table-server>

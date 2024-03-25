@@ -2,6 +2,7 @@
 import { defineComponent, ref, onMounted } from 'vue';
 import ContentLayout from "./../../../layouts/full/content/form/FormContentLayout.vue";
 import UserForm from '../users/user-form.vue';
+import ColorForm from '../colors/color-form.vue';
 import { getDocumentInfo } from '@/config/doInfo';
 
 
@@ -13,9 +14,10 @@ const documentService = new DocumentService(apiEndpoints);
 
 // Define the user list component
 export default defineComponent({
-  name: "edit-user-view",
+  name: "edit-doc-view",
   data() {
     return {
+      docInfo: getDocumentInfo(this.$route.meta.docName),
       viewInfo: getDocumentInfo(this.$route.meta.docName).edit,
       model: {
       }
@@ -23,12 +25,13 @@ export default defineComponent({
   },
   components: {
     ContentLayout,
-    UserForm
+    UserForm,
+    ColorForm
   },
   methods: {
     async fertchUser() {
       try {
-        this.model = await documentService.get(this.$route.params.id);  
+        this.model = await documentService.get(this.docInfo.api_end_point, this.$route.params.id);  
         this.$emit('update:modelValue', this.model);
       } catch (error) {
         console.error('Error fetching document:', error);
@@ -45,7 +48,7 @@ export default defineComponent({
       ];
     },
     getListRoute() {
-      const route = this.$router.resolve({ name: this.viewInfo.list_route_name });
+      const route = this.$router.resolve({ name: this.docInfo.list_route });
       return route.path;
     },
     async saveButtonClicked() {
@@ -53,7 +56,7 @@ export default defineComponent({
       if (valid) {  
         const id = this.$route.params.id;
         const data = this.$refs.docForm.getData();
-        documentService.update(id, data)
+        documentService.update(this.viewInfo.apiEndpoints,id, data)
         .then(response => {
           this.$router.go(-1);
         })

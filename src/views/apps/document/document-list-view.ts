@@ -6,6 +6,13 @@ import { getDocumentInfo } from '@/config/doInfo';
 import ContentLayout from "./../../../layouts/full/content/list/ListContentLayout.vue";
 import QuestionDialog from '@/views/widgets/dialog/question/QuestionDialog.vue';
 import userListRow from '../users/user-list-item.vue';
+import StringFieldValue from './filed/StringFieldValue.vue'
+import ArrayFieldValue from './filed/ArrayFieldValue.vue'
+import DateTimeFieldValue from './filed/DateTimeFieldValue.vue'
+import BooleanFieldValue from './filed/BooleanFieldValue.vue'
+import RoundedPhotoFieldValue from './filed/RoundedPhotoFieldValue.vue'
+import ColorFieldValue from './filed/ColorFieldValue.vue'
+
 
 const documentService = new DocumentService(apiEndpoints);
 
@@ -30,6 +37,12 @@ export default defineComponent({
     userListRow,
     ContentLayout,
     QuestionDialog,
+    StringFieldValue,
+    ArrayFieldValue,
+    DateTimeFieldValue,
+    BooleanFieldValue,
+    RoundedPhotoFieldValue,
+    ColorFieldValue
   },
   methods: {
     calculateHeight() {
@@ -66,7 +79,7 @@ export default defineComponent({
         order = sortObj.order;
       }
 
-      documentService.getAll(this.$route.meta.docName,'',true, page, itemsPerPage, sort, order)
+      documentService.getAll(this.docinfo.list.endpoint,'',true, page, itemsPerPage, sort, order)
       .then((response: any) => {
         this.docs = response.docs;
         this.totalItems = response.totalItems;

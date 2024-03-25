@@ -1,0 +1,48 @@
+.dialog {
+
+    .v-card {
+        height: 40vh;
+        width: 30vw;
+        .v-card-title {
+            font-size: 1.05rem;
+        }
+
+        .message {
+            font-size: 1rem;
+        }
+
+        .dropzone {
+
+            height: 20vh;
+            border: 1px solid #35eb9a;
+
+            .select-picture {
+                position: relative;
+                line-height: 38px;
+                font-size: 14px;
+                color: white;
+                border-color: green;
+                background-color: green;
+                border-radius: 20px;
+                padding: 0 40px;
+                margin-bottom: 1em;
+                display: inline-block;
+                border: 1px solid transparent;
+                text-align: center;
+                white-space: nowrap;
+                transition: color 0.25s, border-color 0.25s, background-color 0.25s;
+                cursor: pointer;
+                :hover {
+                    border-color: #35eb9a;
+                  color: white;
+                  background-color: #35eb9a;
+                };
+               
+              }
+        }
+    }
+
+    
+
+}
+

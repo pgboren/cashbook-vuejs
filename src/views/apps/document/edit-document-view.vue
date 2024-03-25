@@ -16,7 +16,8 @@
         </template>
 
         <template #form>
-            <UserForm ref="docForm" v-model="model"/>     
+          <ColorForm v-if="$route.meta.docName == 'color'"  ref="docForm" v-model="model"/>     
+          <UserForm v-if="$route.meta.docName == 'user'"  ref="docForm" v-model="model"/>     
         </template>
     </ContentLayout>
 </template>

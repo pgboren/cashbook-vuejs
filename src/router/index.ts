@@ -46,18 +46,49 @@ const router = createRouter({
         {
           name: "vehicles",
           path: "/vehicles",
-          component: () => import("@/views/apps/vehicle/vehicle-list-view.vue"),
+          component: () => import("@/views/apps/document/document-list-view.vue"),
           meta: {
             docName: "vehicle",
           },
         },
-        
+        {
+          name: "colors",
+          path: "/colors",
+          component: () => import("@/views/apps/document/document-list-view.vue"),
+          meta: {
+            docName: "color"
+          },
+        },
+        {
+          name: "view-color",
+          path: "/colors/:id",
+          component: () => import("@/views/apps/document/document-view.vue"),
+          meta: {
+            docName: "color",
+          },
+        },
+        {
+          name: "edit-color",
+          path: "/colors/edit/:id",
+          component: () => import("@/views/apps/document/edit-document-view.vue"),
+          meta: {
+            docName: "color",
+          },
+        },
+        {
+          name: "add-color",
+          path: "/colors/addnew",
+          component: () => import("@/views/apps/document/add-document-view.vue"),
+          meta: {
+            docName: "color",
+          },
+        },
         {
           name: "users",
           path: "/users",
           component: () => import("@/views/apps/document/document-list-view.vue"),
           meta: {
-            docName: "user",
+            docName: "user"
           },
         },
         {
@@ -83,7 +114,17 @@ const router = createRouter({
           meta: {
             docName: "user",
           },
+        },
+        {
+          name: "upload_user_profile_picture",
+          path: "/users/profile_upload/:id",
+          component: () => import("@/views/apps/users/user-profile-picture-upload.vue"),
+          meta: {
+            docName: "user",
+          },
         }
+        
+        
       ],
     },
     {
@@ -100,12 +141,15 @@ const router = createRouter({
   ],
 });
 
-router.beforeEach((to, from, next) => {
-  const useStore = useUserStore()
-  //We have to add check the access token of It is expired
-  if (to.meta.requiresAuth && !useStore.isLoggedIn) return '/login'
-  next();
-})
+// router.beforeEach((to, from, next) => {
+//   const userStore = useUserStore(); // Assuming useUserStore is a Vue Composition API function
+//   // We have to add check the access token if it is expired
+//   if (to.meta.requiresAuth && !userStore.isLoggedIn) {
+//     next('/login'); // Redirect to login page if not logged in
+//   } else {
+//     next(); // Continue navigation
+//   }
+// });
 
 
 export default router;

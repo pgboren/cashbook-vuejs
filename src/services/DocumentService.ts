@@ -6,9 +6,9 @@ import axios from 'axios';
 
 class DocumentService extends BaseService {
 
-  async update(id: String, formData:any) : Promise<any> {
+  async update(endPoint: string, id: string, formData:any) : Promise<any> {
     return new Promise((resolve, reject) => {
-      const apiUrl = `${this.apiEndpoints.auth.user}/${id}`;
+      const apiUrl = `${endPoint}/${id}`;
       axios.put(apiUrl, formData, this.config).then(response => {
         if (response.status === 200) {
           return response.data;
@@ -20,7 +20,7 @@ class DocumentService extends BaseService {
       });
   }
 
-  async getAll(docname: string, keyword: string, deleted:boolean, page:number, limit:number, sort:string, order: string) {
+  async getAll(endpoint_name: string, keyword: string, deleted:boolean, page:number, limit:number, sort:string, order: string) {
       const requestOptions = {
         method: 'GET',
         headers: { 
@@ -28,7 +28,7 @@ class DocumentService extends BaseService {
           'x-access-token': useUserStore().currentUser.accessToken
         }
       };
-      const apiUrl = `${this.apiEndpoints.view.doc_list}/users?deleted=${deleted}&page=${page}&limit=${limit}&sort=${sort}&order=${order}&keyword=${keyword}`;
+      const apiUrl = `${this.apiEndpoints.view.doc_list}/${endpoint_name}?deleted=${deleted}&page=${page}&limit=${limit}&sort=${sort}&order=${order}&keyword=${keyword}`;
 
       const response = await fetch(apiUrl, requestOptions);
       if (!response.ok) {
@@ -37,9 +37,9 @@ class DocumentService extends BaseService {
       return response.json();
   }
 
-  async delete(docId: String) : Promise<any> {
+  async delete(api_end_point:string, docId: String) : Promise<any> {
     return new Promise((resolve, reject) => {
-      const apiUrl = `${this.apiEndpoints.auth.user}/${docId}`;
+      const apiUrl = `${api_end_point }/${docId}`;
       axios.delete(apiUrl, this.config).then(response => {
         if (response.status === 200) {
           return response.data;
@@ -51,9 +51,10 @@ class DocumentService extends BaseService {
       });
   }
 
-  add(formData:any): Promise<any> {
+  add(url: string, formData:any): Promise<any> {
+
     return new Promise((resolve, reject) => {
-      axios.post(this.apiEndpoints.auth.user, formData, this.config).then(response => {
+      axios.post(url, formData, this.config).then(response => {
         if (response.status === 201) {
           return response.data;
         } else {
@@ -61,10 +62,11 @@ class DocumentService extends BaseService {
         }
       }).then(data => resolve(data))
         .catch(error => reject(`Error: ${error.message}`));
-      });
-    }
+    });
+  }
+    
 
-  async get(docId: String) : Promise<any> {
+  async get(endPoint:string, id: String) : Promise<any> {
     return new Promise((resolve, reject) => {
       const requestOptions = {
         method: 'GET',
@@ -73,7 +75,7 @@ class DocumentService extends BaseService {
           'x-access-token': useUserStore().currentUser.accessToken
         }
       };
-      const apiUrl = `${this.apiEndpoints.auth.user}/${docId}`;
+      const apiUrl = `${endPoint}/${id}`;
       fetch(apiUrl, requestOptions)
         .then(response => {
           if (response.ok) {

@@ -37,5 +37,12 @@ export default [
     type: "DOCUMENT_LIST",
     iconType: "feather",
     to: "/users",
+  },
+  {
+    title: "ឈ្មោះព៍ណ",
+    icon: "users",
+    type: "DOCUMENT_LIST",
+    iconType: "feather",
+    to: "/colors",
   }
 ];

@@ -9,6 +9,7 @@ import DocumentService from '@/services/DocumentService';
 import apiEndpoints from '@/config/config';
 
 import UserForm from '../users/user-form.vue';
+import ColorForm from '../colors/color-form.vue';
 
 const documentService = new DocumentService(apiEndpoints);
 
@@ -24,19 +25,13 @@ export default defineComponent({
       password_visible: true,
       confirm_password_visible: true,
       model: {
-        username: '',
-        email:'',
-        password: '',
-        enable: true,
-        confirmPassword: '',
-        files: [],
-        roles:[]
       } 
     };
   },
   components: {
     ContentLayout,
-    UserForm
+    UserForm,
+    ColorForm
   },
   methods: {
     reset() {
@@ -45,11 +40,7 @@ export default defineComponent({
     async validate () {
       const  valid  = await this.$refs.docForm.validate();
       if (valid) {    
-
-        //we use form data to manage file upload
-        //this.$refs.docForm.getData(), but we have to use config_multipart
-
-        documentService.add(this.model)
+        documentService.add(this.viewInfo.apiEndpoints, this.$refs.docForm.getData())
         .then(response => {
           this.reset();
         })

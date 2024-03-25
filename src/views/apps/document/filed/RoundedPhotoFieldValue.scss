@@ -1,0 +1,26 @@
+.avatar-widget {
+    input {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 0;
+        font-size: 0;
+        cursor: pointer;
+        opacity: 0;
+    }
+
+    .avatar-container {
+        position: relative;
+        display: inline-block; /* Ensures that the container takes up only as much space as necessary */
+      }
+      
+      .camera-btn {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        margin: 0px;
+        width: 22px;
+        height: 22px;
+      }
+}

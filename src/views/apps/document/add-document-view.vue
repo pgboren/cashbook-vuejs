@@ -3,7 +3,7 @@
         <template #title>
           <v-breadcrumbs :items="getBreadcrumbsData()">
             <template v-slot:prepend>
-              <vue-feather type="users" class="feather-sm v-icon v-icon--size-default"></vue-feather>
+              <v-icon :icon="viewInfo.icon"></v-icon>
             </template>
             <template v-slot:divider>
               <v-icon icon="mdi-chevron-right"></v-icon>
@@ -16,7 +16,9 @@
         </template>
 
         <template #form>
-          <UserForm  ref="docForm" v-model="model"/>     
+          <ColorForm v-if="$route.meta.docName == 'color'"  ref="docForm" v-model="model"/>     
+          <UserForm v-if="$route.meta.docName == 'user'"  ref="docForm" v-model="model"/>     
+          
         </template>
     </ContentLayout>
 </template>
