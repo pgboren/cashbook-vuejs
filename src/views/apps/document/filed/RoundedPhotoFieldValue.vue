@@ -16,7 +16,7 @@
     <input ref="fileInput" type="file" accept="image/jpg, image/jpeg, image/png, image/gif" @change="handleFileChange"/>
   </div>
 
-  <PictureCropperDialog  ref="pictureCropperDialog" @onCropButtonClicked="onPictureCropped"/>
+  <PictureCropperDialog  ref="pictureCropperDialog"  @onCropButtonClicked="onPictureCropped"/>
   
 </template>
 
@@ -25,7 +25,7 @@
   import apiEndpoints from '@/config/config';
   import PictureCropperDialog from './PictureCropperDialog.vue';
   import MediaService from '@/services/MedialService';
-
+  
   const mediaService = new MediaService(apiEndpoints);
 
   export default defineComponent({
@@ -57,18 +57,23 @@
     methods: {
       openFileInput() {
         if (this.readonly) return;
-        this.$refs.fileInput.click();
+        (this.$refs.fileInput as HTMLInputElement).click();
       },
-      handleFileChange(event) {
+      handleFileChange(event: Event) {
         this.pic = '';
-        const file = event.target.files[0];
-        if (file) {
-          if (file.type.startsWith('image/')) {
-            this.$refs.pictureCropperDialog.show(file);
-          } else {
-            this.avatarImage = this.getPath();
+
+        if (event.target) {
+          const inputElement = event.target as HTMLInputElement;
+          const file = inputElement.files?.[0];
+          if (file) {
+            if (file.type.startsWith('image/')) {
+              const cropperDialog = this.$refs.pictureCropperDialog;
+              cropperDialog.show(file);
+            } else {
+              this.avatarImage = this.getPath();
+            }
           }
-        }
+        }        
       },
       onPictureCropped(result) {
         this.result = result;

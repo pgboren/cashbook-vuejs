@@ -5,7 +5,7 @@
         <template #title>
           <v-breadcrumbs :items="getBreadcrumbsData()">
             <template v-slot:prepend>
-              <v-icon :icon="docinfo?.list.icon"></v-icon>
+              <v-icon :icon="docinfo?.icon"></v-icon>
             </template>
             <template v-slot:divider>
               <v-icon icon="mdi-chevron-right"></v-icon>

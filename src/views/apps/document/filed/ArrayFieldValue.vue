@@ -16,13 +16,19 @@
   export default defineComponent({
     name: "string-field-view",
     props: {
-      doc: { type: Object },
-      field: { type: Object }
+      doc: {
+      type: Object,
+      default: () => ({})
+    },
+    field: {
+      type: Object,
+      default: () => ({})
+    }
     },
     methods: {
       generateStringRepresentation() {
         if (this.doc && this.field && Array.isArray(this.doc[this.field.name])) {
-          return this.doc[this.field.name].map(item => item.name).join(', ');
+          return this.doc[this.field.name].map((item: { name: any; }) => item.name).join(', ');
         } else {
           return '';
         }

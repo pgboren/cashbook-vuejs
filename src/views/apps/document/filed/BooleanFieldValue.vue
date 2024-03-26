@@ -1,7 +1,6 @@
-<!-- StringComponent.vue -->
 <template>
   <v-chip class="user-role-chip" label  variant="tonal" size="small" :color="doc[field.name] ? 'green' : 'red'">
-      {{ doc[field.name] ? field.true : field.false }}  
+    {{ doc[field.name] ? (field.true || '') : (field.false || '') }}
   </v-chip>
 </template>
 <script lang="ts">

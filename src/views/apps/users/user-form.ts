@@ -52,7 +52,7 @@ export default defineComponent({
           min: (v: string | any[]) => v.length >= 8 || 'Min 8 characters'
         },
         files: {
-          required: (value: any) => v.length > 0 || 'Required.',
+          required: (value: any) => value.length > 0 || 'Required.',
         },
         email: [
           (          value: any) => {
@@ -71,7 +71,7 @@ export default defineComponent({
       password_visible: true,
       confirm_password_visible: true,
       model: this.modelValue,
-      roles:[]
+      roles: [] as any[]
     };
   },
   components: {
@@ -80,21 +80,26 @@ export default defineComponent({
   methods: {
     
     async checkEmailExists(email: string) {
-      const result = await userService.checkEmailExisted(email, this.model._id);
-      if (result == true) {
-        return 'Email is already exist.';
+      if (this.model) {
+        const result = await userService.checkEmailExisted(email, this.model._id);
+        return result;
       }
-      return true;
+      
+      return false;
     },
     async checkUsernameExists(name: string) {
-      const result = await userService.checkUsernameExisted(name, this.model._id);
-      if (result == true) {
-        return 'Username is already exist.';
+      if (this.model) {
+        const result = await userService.checkUsernameExisted(name, this.model._id);
+        return result;
       }
-      return true;
+      return false;
     },
     confirmPasswordMatchRule(v: string) {
-      return v === this.model.password || 'Passwords do not match';
+      if (this.model && this.model.password !== undefined) {
+        return v === this.model.password || 'Passwords do not match';
+      }
+      // Handle the undefined case, e.g., by returning a specific error message
+      return 'Model or password is undefined'; // Adjust based on your requirements
     },
     reset() {
       const form = this.$refs.form as HTMLFormElement;
@@ -124,8 +129,9 @@ export default defineComponent({
     },
     getRoles(){
         roleService.getAll().then((response: any) => {
-          const rolesArray = Array.from(response);
-          rolesArray.forEach((role, index) => this.roles.push(role));
+          Array.from(response).forEach((role: any) => {
+            this.roles.push(role);
+          });
         })
         .catch((error: any) => {
           console.error('Error fetching user data:', error);
@@ -135,4 +141,4 @@ export default defineComponent({
   mounted() {
       this.getRoles();
   },
-});
+} );

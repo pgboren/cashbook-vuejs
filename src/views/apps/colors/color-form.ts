@@ -1,7 +1,5 @@
 // Import necessary modules from Vue
-import { defineComponent, ref, onMounted } from 'vue';
-import ContentLayout from "./../../../layouts/full/content/form/FormContentLayout.vue";
-import apiEndpoints from '@/config/config';
+import { defineComponent } from 'vue';
 import { VSwatches } from 'vue3-swatches'
 import 'vue3-swatches/dist/style.css'
 
@@ -22,7 +20,6 @@ export default defineComponent({
   },
   data() {
     return {
-      config:apiEndpoints ,
       valid: false,
       files: [],
       actions: [
@@ -37,7 +34,6 @@ export default defineComponent({
       };
   },
   components: {
-    ContentLayout,
     VSwatches
   },
   methods: {
@@ -45,10 +41,14 @@ export default defineComponent({
       this.$refs.form.reset();
     },
     getData() {
-      const data = {};
-      data.name = this.model.name;
-      data.code = this.model.code;
-      return data;
+      if (this.model) {
+        const data : RefDoc = {
+          name: this.model.name,
+          code: this.model.code  
+        };
+        return data;
+      }
+      return null;
     },
     async validate(): boolean {
       const { valid } = await this.$refs.form.validate();

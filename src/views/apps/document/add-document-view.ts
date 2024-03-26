@@ -2,7 +2,7 @@
 import { defineComponent, ref, onMounted } from 'vue';
 import ContentLayout from "./../../../layouts/full/content/form/FormContentLayout.vue";
 
-import { getDocumentInfo } from '@/config/doInfo';
+import { getDocumentInfo, type DocumentInfos } from '@/config/doInfo';
 
 // Import UserService and apiEndpoints
 import DocumentService from '@/services/DocumentService';
@@ -19,6 +19,7 @@ export default defineComponent({
   data() {
     return {
       config:apiEndpoints ,
+      docInfo: getDocumentInfo(this.$route.meta.docName as keyof DocumentInfos),
       viewInfo: getDocumentInfo(this.$route.meta.docName).new,
       valid: false,
       files: [],

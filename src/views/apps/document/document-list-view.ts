@@ -13,7 +13,6 @@ import BooleanFieldValue from './filed/BooleanFieldValue.vue'
 import RoundedPhotoFieldValue from './filed/RoundedPhotoFieldValue.vue'
 import ColorFieldValue from './filed/ColorFieldValue.vue'
 
-
 const documentService = new DocumentService(apiEndpoints);
 
 export default defineComponent({
@@ -92,7 +91,9 @@ export default defineComponent({
       
     },
     handleTableRowClicked(item: any) {
+      if (this.docinfo) {
         this.view(this.docinfo.list.view_route_name , item._id);
+      }
     }
   },
   mounted() {
