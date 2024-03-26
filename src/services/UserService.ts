@@ -18,7 +18,7 @@ class UserService {
     this.apiEndpoints = apiEndpoints;
   }
 
-  async checkUsernameExisted(username:String, userId: any): boolean {
+  async checkUsernameExisted(username:String, userId: any): Promise<boolean> {
     try {
       var apiUrl = `${this.apiEndpoints.auth.user}/check-username-exists?username=${username}`;
       if (userId) {
@@ -30,12 +30,12 @@ class UserService {
         return true;
       }
       return false;
-    } catch (error) {
+    } catch (error: any) {
       return error.message;
     }
 }
 
-  async checkEmailExisted(email:String, userId: any): boolean {
+  async checkEmailExisted(email:String, userId: any): Promise<boolean> {
     try {
       var apiUrl = `${this.apiEndpoints.auth.user}/check-email-exists?email=${email}`;
       if (userId) {
@@ -47,7 +47,7 @@ class UserService {
         return true;
       }
       return false;
-    } catch (error) {
+    } catch (error: any) {
       return error.message;
     }
 }
@@ -58,7 +58,7 @@ class UserService {
           method: 'GET',
           headers: { 
             'Content-Type': 'application/json',
-            'x-access-token': useUserStore().currentUser.accessToken
+            'x-access-token': useUserStore().currentUser.accessToken || ''
           }
         };
         const apiUrl = `${this.apiEndpoints.auth.user}?deleted=${deleted}&page=${page}&limit=${limit}&sort=${sort}&order=${order}`;

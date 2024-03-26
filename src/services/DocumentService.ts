@@ -25,7 +25,7 @@ class DocumentService extends BaseService {
         method: 'GET',
         headers: { 
           'Content-Type': 'application/json',
-          'x-access-token': useUserStore().currentUser.accessToken
+          'x-access-token': useUserStore().currentUser.accessToken || ''
         }
       };
       const apiUrl = `${this.apiEndpoints.view.doc_list}/${endpoint_name}?deleted=${deleted}&page=${page}&limit=${limit}&sort=${sort}&order=${order}&keyword=${keyword}`;

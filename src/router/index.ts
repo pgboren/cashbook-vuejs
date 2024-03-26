@@ -34,16 +34,6 @@ const router = createRouter({
           }
         },
         {
-          name: "Grids",
-          path: "/grids",
-          component: () => import("@/views/ui-components/Grids.vue"),
-        },
-        {
-          name: "Cards",
-          path: "/cards",
-          component: () => import("@/views/ui-components/Cards.vue"),
-        },
-        {
           name: "vehicles",
           path: "/vehicles",
           component: () => import("@/views/apps/document/document-list-view.vue"),
