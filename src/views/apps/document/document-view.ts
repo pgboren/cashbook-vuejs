@@ -4,6 +4,7 @@ import ContentLayout from "./../../../layouts/full/content/BaseViewContentLayout
 import QuestionDialog from '@/views/widgets/dialog/question/QuestionDialog.vue';
 import MediaUploadDialog from '@/views/widgets/dialog/media/MediaUploadDialog.vue';
 import { getDocumentInfo, type DocumentInfos } from '@/config/doInfo';
+import BranchUsers from '../branch/branch-users.vue';
 
 import DocumentService from '@/services/DocumentService';
 import apiEndpoints from '@/config/config';
@@ -37,7 +38,8 @@ export default defineComponent({
     DateTimeFieldValue,
     BooleanFieldValue,
     RoundedPhotoFieldValue,
-    ColorFieldValue
+    ColorFieldValue,
+    BranchUsers
   },
   methods: {
     async fertchDocument() {

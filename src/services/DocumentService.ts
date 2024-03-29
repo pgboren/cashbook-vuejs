@@ -20,7 +20,7 @@ class DocumentService extends BaseService {
       });
   }
 
-  async getAll(endpoint_name: string, keyword: string, deleted:boolean, page:number, limit:number, sort:string, order: string) {
+  async getAll(endpoint: string, keyword: string, deleted:boolean, page:number, limit:number, sort:string, order: string) {
       const requestOptions = {
         method: 'GET',
         headers: { 
@@ -28,7 +28,7 @@ class DocumentService extends BaseService {
           'x-access-token': useUserStore().currentUser.accessToken || ''
         }
       };
-      const apiUrl = `${this.apiEndpoints.view.doc_list}/${endpoint_name}?deleted=${deleted}&page=${page}&limit=${limit}&sort=${sort}&order=${order}&keyword=${keyword}`;
+      const apiUrl = `${endpoint}?deleted=${deleted}&page=${page}&limit=${limit}&sort=${sort}&order=${order}&keyword=${keyword}`;
 
       const response = await fetch(apiUrl, requestOptions);
       if (!response.ok) {

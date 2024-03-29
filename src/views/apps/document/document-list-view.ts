@@ -59,7 +59,7 @@ export default defineComponent({
       (this.$refs.userInputDialog as any).dialog = true;
     },
     addNew() {
-      this.$router.push({ name: this.docinfo.list.add_route_name });
+      this.$router.push({ name: this.docinfo.add_route });
     },
     getBreadcrumbsData(): any {
       return [{
@@ -78,7 +78,7 @@ export default defineComponent({
         order = sortObj.order;
       }
 
-      documentService.getAll(this.docinfo.list.endpoint,'',true, page, itemsPerPage, sort, order)
+      documentService.getAll(this.docinfo.api_end_point,'',true, page, itemsPerPage, sort, order)
       .then((response: any) => {
         this.docs = response.docs;
         this.totalItems = response.totalItems;
@@ -92,7 +92,7 @@ export default defineComponent({
     },
     handleTableRowClicked(item: any) {
       if (this.docinfo) {
-        this.view(this.docinfo.list.view_route_name , item._id);
+        this.view(this.docinfo.view_route , item._id);
       }
     }
   },

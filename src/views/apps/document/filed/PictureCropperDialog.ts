@@ -1,4 +1,4 @@
-import { defineComponent, ref, onMounted } from 'vue';
+import { defineComponent } from 'vue';
 import VuePictureCropper, { cropper } from 'vue-picture-cropper'
 
 interface CropResult {

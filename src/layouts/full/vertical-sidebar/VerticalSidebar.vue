@@ -33,7 +33,7 @@
           <v-list-subheader v-if="item.header">{{ item.header }}</v-list-subheader>
           <v-list-item v-else  :to="item.to" rounded="lg" class="mb-1">
             <template v-slot:prepend>
-              <vue-feather :type="item.icon" class="feather-sm v-icon v-icon--size-default"></vue-feather>
+              <v-icon :icon="item.icon"></v-icon>
             </template>
             <v-list-item-title v-text="item.title"></v-list-item-title>
           </v-list-item>        

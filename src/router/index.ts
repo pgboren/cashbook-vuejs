@@ -34,11 +34,163 @@ const router = createRouter({
           }
         },
         {
-          name: "vehicles",
-          path: "/vehicles",
+          name: "branches",
+          path: "/branches",
           component: () => import("@/views/apps/document/document-list-view.vue"),
           meta: {
-            docName: "vehicle",
+            docName: "branch",
+          },
+        },
+        {
+          name: "view-branch",
+          path: "/items/:id",
+          component: () => import("@/views/apps/document/document-view.vue"),
+          meta: {
+            docName: "branch",
+          },
+        },
+        {
+          name: "add-branch",
+          path: "/items/addnew",
+          component: () => import("@/views/apps/document/add-document-view.vue"),
+          meta: {
+            docName: "branch",
+          },
+        },
+        {
+          name: "edit-branch",
+          path: "/items/edit/:id",
+          component: () => import("@/views/apps/document/edit-document-view.vue"),
+          meta: {
+            docName: "branch",
+          },
+        },
+        {
+          name: "items",
+          path: "/items",
+          component: () => import("@/views/apps/document/document-list-view.vue"),
+          meta: {
+            docName: "item",
+          },
+        },
+        {
+          name: "view-item",
+          path: "/items/:id",
+          component: () => import("@/views/apps/document/document-view.vue"),
+          meta: {
+            docName: "item",
+          },
+        },
+        {
+          name: "add-item",
+          path: "/items/addnew",
+          component: () => import("@/views/apps/document/add-document-view.vue"),
+          meta: {
+            docName: "item",
+          },
+        },
+        {
+          name: "edit-item",
+          path: "/items/edit/:id",
+          component: () => import("@/views/apps/document/edit-document-view.vue"),
+          meta: {
+            docName: "item",
+          },
+        },
+        {
+          name: "categories",
+          path: "/categories",
+          component: () => import("@/views/apps/document/document-list-view.vue"),
+          meta: {
+            docName: "category"
+          },
+        },
+        {
+          name: "view-category",
+          path: "/categories/:id",
+          component: () => import("@/views/apps/document/document-view.vue"),
+          meta: {
+            docName: "category",
+          },
+        },
+        {
+          name: "add-category",
+          path: "/categories/addnew",
+          component: () => import("@/views/apps/document/add-document-view.vue"),
+          meta: {
+            docName: "category",
+          },
+        },
+        {
+          name: "edit-category",
+          path: "/categories/edit/:id",
+          component: () => import("@/views/apps/document/edit-document-view.vue"),
+          meta: {
+            docName: "category",
+          },
+        },
+        {
+          name: "conditions",
+          path: "/conditions",
+          component: () => import("@/views/apps/document/document-list-view.vue"),
+          meta: {
+            docName: "condition"
+          },
+        },
+        {
+          name: "view-condition",
+          path: "/conditions/:id",
+          component: () => import("@/views/apps/document/document-view.vue"),
+          meta: {
+            docName: "condition",
+          },
+        },
+        {
+          name: "add-condition",
+          path: "/conditions/addnew",
+          component: () => import("@/views/apps/document/add-document-view.vue"),
+          meta: {
+            docName: "condition",
+          },
+        },
+        {
+          name: "edit-condition",
+          path: "/conditions/edit/:id",
+          component: () => import("@/views/apps/document/edit-document-view.vue"),
+          meta: {
+            docName: "condition",
+          },
+        },
+        {
+          name: "models",
+          path: "/models",
+          component: () => import("@/views/apps/document/document-list-view.vue"),
+          meta: {
+            docName: "model"
+          },
+        },
+        {
+          name: "view-model",
+          path: "/models/:id",
+          component: () => import("@/views/apps/document/document-view.vue"),
+          meta: {
+            docName: "model",
+          },
+        },
+        {
+          name: "add-model",
+          path: "/models/addnew",
+          component: () => import("@/views/apps/document/add-document-view.vue"),
+          meta: {
+            docName: "model",
+          },
+        },
+        {
+          name: "edit-model",
+          path: "/models/edit/:id",
+          component: () => import("@/views/apps/document/edit-document-view.vue"),
+          meta: {
+            docName: "model",
           },
         },
         {

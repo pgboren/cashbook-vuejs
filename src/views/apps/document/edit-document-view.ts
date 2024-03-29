@@ -3,6 +3,10 @@ import { defineComponent, ref, onMounted } from 'vue';
 import ContentLayout from "./../../../layouts/full/content/form/FormContentLayout.vue";
 import UserForm from '../users/user-form.vue';
 import ColorForm from '../colors/color-form.vue';
+import RefdocForm from '../refdoc/refdoc-form.vue';
+import ItemForm from '../items/item-form.vue';
+import BranchForm from '../branch/branch-form.vue';
+
 import { getDocumentInfo } from '@/config/doInfo';
 import type { DocumentInfos } from '@/config/doInfo';
 
@@ -26,7 +30,10 @@ export default defineComponent({
   components: {
     ContentLayout,
     UserForm,
-    ColorForm
+    ColorForm,
+    RefdocForm,
+    ItemForm,
+    BranchForm
   },
   methods: {
     async fertchUser() {

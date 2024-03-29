@@ -35,33 +35,33 @@
         </template>
 
         <template #body>
-          <v-col cols="3" class="pa-0">
-          <v-sheet 
+          <v-col cols="3">
+            <h3 class="mb-4">General</h3>
+            <v-sheet
             elevation="12"
-            class="pa-4 text-center"
+            class="text-center"
             rounded="lg">
-              <v-table>
-              <tbody>
-
-                <tr v-for="field in docInfo.view.fields">
-
-                  <td class="pa-2 text-left">
-                    {{ field.title }}
-                  </td>
-                  <td class="pa-2 text-left">
-                    <RoundedPhotoFieldValue v-if="field.type == 'photo'" :readonly="false" :doc="doc" :field="field"/>
-                    <StringFieldValue v-if="field.type == 'string'" :doc="doc" :name="field.name" />
-                    <ArrayFieldValue v-if="field.type == 'array'" :doc="doc" :field="field"  />
-                    <DateTimeFieldValue v-if="field.type == 'datetime'" :doc="doc" :field="field"  />
-                    <BooleanFieldValue v-if="field.type == 'boolean'" :doc="doc" :field="field"  />
-                    <ColorFieldValue v-if="field.type == 'color'" :doc="doc" :field="field"  />
-                  </td>
-                </tr>
-              </tbody>
-            </v-table>
-          </v-sheet>
-      </v-col>
-    </template>
+                <v-table>
+                <tbody>
+                  <tr v-for="field in docInfo.view.fields">
+                    <td class="pa-2 text-left">
+                      {{ field.title }}
+                    </td>
+                    <td class="pa-2 text-left">
+                      <RoundedPhotoFieldValue v-if="field.type == 'photo'" :readonly="false" :doc="doc" :field="field"/>
+                      <StringFieldValue v-if="field.type == 'string'" :doc="doc" :name="field.name" />
+                      <ArrayFieldValue v-if="field.type == 'array'" :doc="doc" :field="field"  />
+                      <DateTimeFieldValue v-if="field.type == 'datetime'" :doc="doc" :field="field"  />
+                      <BooleanFieldValue v-if="field.type == 'boolean'" :doc="doc" :field="field"  />
+                      <ColorFieldValue v-if="field.type == 'color'" :doc="doc" :field="field"  />
+                    </td>
+                  </tr>
+                </tbody>
+              </v-table>
+            </v-sheet>
+          </v-col>
+          <BranchUsers/>
+        </template>
   </ContentLayout>
 </template>
 <script lang="ts" src="./document-view.ts"></script>

@@ -10,6 +10,9 @@ import apiEndpoints from '@/config/config';
 
 import UserForm from '../users/user-form.vue';
 import ColorForm from '../colors/color-form.vue';
+import RefdocForm from '../refdoc/refdoc-form.vue';
+import ItemForm from '../items/item-form.vue';
+import BranchForm from '../branch/branch-form.vue';
 
 const documentService = new DocumentService(apiEndpoints);
 
@@ -32,7 +35,10 @@ export default defineComponent({
   components: {
     ContentLayout,
     UserForm,
-    ColorForm
+    ColorForm,
+    RefdocForm,
+    ItemForm,
+    BranchForm
   },
   methods: {
     reset() {
@@ -41,7 +47,7 @@ export default defineComponent({
     async validate () {
       const  valid  = await this.$refs.docForm.validate();
       if (valid) {    
-        documentService.add(this.viewInfo.apiEndpoints, this.$refs.docForm.getData())
+        documentService.add(this.docInfo.api_end_point, this.$refs.docForm.getData())
         .then(response => {
           this.reset();
         })
@@ -51,12 +57,12 @@ export default defineComponent({
       }
     },
     getListRoute() {
-      const route = this.$router.resolve({ name: this.viewInfo.list_route_name });
+      const route = this.$router.resolve({ name: this.docInfo.list_route });
       return route.path;
     },
     getBreadcrumbsData(): any {
       return [{
-        title: this.viewInfo.title,
+        title: this.docInfo.new.title,
         href: this.getListRoute() ,
       },
       {

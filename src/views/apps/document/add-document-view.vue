@@ -18,7 +18,11 @@
         <template #form>
           <ColorForm v-if="$route.meta.docName == 'color'"  ref="docForm" v-model="model"/>     
           <UserForm v-if="$route.meta.docName == 'user'"  ref="docForm" v-model="model"/>     
-          
+          <RefdocForm v-if="$route.meta.docName == 'model'"  ref="docForm" v-model="model"/>
+          <RefdocForm v-if="$route.meta.docName == 'condition'"  ref="docForm" v-model="model"/>
+          <RefdocForm v-if="$route.meta.docName == 'category'"  ref="docForm" v-model="model"/>
+          <ItemForm v-if="$route.meta.docName == 'item'"  ref="docForm" v-model="model"/>
+          <BranchForm v-if="$route.meta.docName == 'branch'"  ref="docForm" v-model="model"/>
         </template>
     </ContentLayout>
 </template>
